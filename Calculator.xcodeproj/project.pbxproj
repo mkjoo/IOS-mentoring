@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5E24700925BBD10300B28EFB /* calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E24700825BBD10300B28EFB /* calculator.swift */; };
 		5EEF8B1225ADD7E5008C8C01 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEF8B1125ADD7E5008C8C01 /* AppDelegate.swift */; };
 		5EEF8B1425ADD7E5008C8C01 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEF8B1325ADD7E5008C8C01 /* SceneDelegate.swift */; };
 		5EEF8B1625ADD7E5008C8C01 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEF8B1525ADD7E5008C8C01 /* ViewController.swift */; };
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5E24700825BBD10300B28EFB /* calculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = calculator.swift; sourceTree = "<group>"; };
 		5EEF8B0E25ADD7E5008C8C01 /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EEF8B1125ADD7E5008C8C01 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5EEF8B1325ADD7E5008C8C01 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				5EEF8B1A25ADD7E6008C8C01 /* Assets.xcassets */,
 				5EEF8B1C25ADD7E6008C8C01 /* LaunchScreen.storyboard */,
 				5EEF8B1F25ADD7E6008C8C01 /* Info.plist */,
+				5E24700825BBD10300B28EFB /* calculator.swift */,
 			);
 			path = Calculator;
 			sourceTree = "<group>";
@@ -259,6 +262,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5EEF8B1625ADD7E5008C8C01 /* ViewController.swift in Sources */,
+				5E24700925BBD10300B28EFB /* calculator.swift in Sources */,
 				5EEF8B1225ADD7E5008C8C01 /* AppDelegate.swift in Sources */,
 				5EEF8B1425ADD7E5008C8C01 /* SceneDelegate.swift in Sources */,
 			);
