@@ -15,10 +15,13 @@ class ViewController: UIViewController {
     var operatorString:String = "";
     var resultText:String = "";
     
-    let calculator: calculator = .init()
+    @IBOutlet private weak var resultLabel: UILabel?
+    
+    let calculator: Calculator = .init()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.calculator.delegate = self
         // Do any additional setup after loading the view.
     }
     
@@ -49,3 +52,22 @@ class ViewController: UIViewController {
 
 }
 
+extension ViewController: CalculatorDelegate {
+    
+    func calculatorNoNumber() {
+        print("There is no Number")
+    }
+    
+    func calculatorNoOperator() {
+        print("There is no Operator")
+    }
+    
+    func calculatorNoResult() {
+        print("There is no Result")
+    }
+    
+    func calculatorDidChangeResult(_ result: Double) {
+        self.resultLabel?.text = "\(result)"
+    }
+    
+}

@@ -7,16 +7,32 @@
 
 import Foundation
 
-class calculator{
+
+protocol CalculatorDelegate: class {
+    func calculatorNoNumber()
+    func calculatorNoOperator()
+    func calculatorNoResult()
+    func calculatorDidChangeResult(_ result: Double)
+}
+
+class Calculator{
     
     var inputFirstNumberString:String = "";
     var inputSecondNumberString:String = "";
     var operatorString:String = "";
     var resultText:String = "";
     
+    weak var delegate: CalculatorDelegate?
+    
     func insertNumberString(_ inputNumberString: String){
+        guard let inputNumberString = inputNumberString else {
+            self.delegate?.calculatorNoNumber()
+            return;
+        }
+        
         if self.operatorString.isEmpty {
             self.inputFirstNumberString += inputNumberString
+            
             print("inputNumber1 ::: \(self.inputFirstNumberString)")
         } else {
             self.inputSecondNumberString += inputNumberString
@@ -66,4 +82,13 @@ class calculator{
 
     
     
+}
+
+private extension Calculator{
+    func didChageResult(_ resultString: String){
+        guard let newResult = Double(resultString) else { return }
+        
+        self.delegate?.calculatorDidChangeResult(newResult)
+        
+    }
 }
