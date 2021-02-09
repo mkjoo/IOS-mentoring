@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="NumbericTableViewCell" customModule="Calculator" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HZA-aP-EQh">
+                        <rect key="frame" x="0.0" y="0.0" width="106.5" height="44"/>
+                        <state key="normal" title="Button"/>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kJY-av-5lK">
+                        <rect key="frame" x="213.5" y="0.0" width="106.5" height="44"/>
+                        <state key="normal" title="Button"/>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2bI-Mf-RD6">
+                        <rect key="frame" x="106.5" y="0.0" width="106.5" height="44"/>
+                        <state key="normal" title="Button"/>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="kJY-av-5lK" firstAttribute="height" secondItem="2bI-Mf-RD6" secondAttribute="height" id="7dr-eB-yYW"/>
+                    <constraint firstItem="HZA-aP-EQh" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="9Ug-8m-j6m"/>
+                    <constraint firstItem="kJY-av-5lK" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="GH7-Vd-00f"/>
+                    <constraint firstItem="kJY-av-5lK" firstAttribute="width" secondItem="2bI-Mf-RD6" secondAttribute="width" id="Gl3-iL-Wau"/>
+                    <constraint firstItem="2bI-Mf-RD6" firstAttribute="leading" secondItem="HZA-aP-EQh" secondAttribute="trailing" id="Hs4-V2-6Gf"/>
+                    <constraint firstItem="HZA-aP-EQh" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" id="Ids-NF-vhL"/>
+                    <constraint firstAttribute="trailing" secondItem="kJY-av-5lK" secondAttribute="trailing" id="QVN-UX-jle"/>
+                    <constraint firstItem="2bI-Mf-RD6" firstAttribute="height" secondItem="HZA-aP-EQh" secondAttribute="height" id="lRA-d9-2FN"/>
+                    <constraint firstItem="2bI-Mf-RD6" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="s3X-To-d9a"/>
+                    <constraint firstItem="HZA-aP-EQh" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.333" id="ttZ-zO-0Dp"/>
+                    <constraint firstItem="2bI-Mf-RD6" firstAttribute="width" secondItem="HZA-aP-EQh" secondAttribute="width" id="vQc-8s-OA8"/>
+                    <constraint firstItem="HZA-aP-EQh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="woj-Fl-HZ7"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="centerButton" destination="2bI-Mf-RD6" id="CCv-yd-gcg"/>
+                <outlet property="leftButton" destination="HZA-aP-EQh" id="gCy-uJ-dhl"/>
+                <outlet property="rightButton" destination="kJY-av-5lK" id="EbV-4p-KUp"/>
+            </connections>
+            <point key="canvasLocation" x="137.68115942028987" y="130.58035714285714"/>
+        </tableViewCell>
+    </objects>
+</document>
