@@ -24,12 +24,12 @@ class Calculator{
     
     weak var delegate: CalculatorDelegate?
     
-    func insertNumberString(_ inputNumberString: String){
-        guard let inputNumberString = inputNumberString else {
+    func inputNewNumber(_ numberString: String?) {
+        guard let inputNumberString = numberString else {
             self.delegate?.calculatorNoNumber()
-            return;
+            return
         }
-        
+
         if self.operatorString.isEmpty {
             self.inputFirstNumberString += inputNumberString
             
