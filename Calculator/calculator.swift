@@ -24,10 +24,10 @@ class Calculator{
     
     weak var delegate: CalculatorDelegate?
     
-    func inputNewNumber(_ numberString: String?) {
+    func inputNewNumber(_ numberString: String?) -> String {
         guard let inputNumberString = numberString else {
             self.delegate?.calculatorNoNumber()
-            return
+            return ""
         }
 
         if self.operatorString.isEmpty {
@@ -38,15 +38,20 @@ class Calculator{
             self.inputSecondNumberString += inputNumberString
             print("inputNumber2 ::: \(self.inputSecondNumberString)")
         }
+        return inputNumberString
+    
+    
     }
         
-    func insertOperatorString(_ newOperatorString: String){
+    func insertOperatorString(_ newOperatorString: String) -> String{
         
         self.operatorString = newOperatorString
         
+        return newOperatorString
+        
     }
         
-    func calculateResult(){
+    func calculateResult() -> String{
         
         guard
             !self.operatorString.isEmpty,
@@ -54,7 +59,7 @@ class Calculator{
             let secondCalculateNumber = Double(inputSecondNumberString)
         else {
             print("no operator!!! or number parsing error")
-            return
+            return ""
         }
 
         if (operatorString == "+"){
@@ -71,6 +76,8 @@ class Calculator{
         self.inputSecondNumberString = "";
         
         print("inputNumber1 :: result :: \(inputFirstNumberString)")
+        
+        return resultText
             
     }
     

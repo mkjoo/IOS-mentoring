@@ -10,6 +10,7 @@ import UIKit
 protocol OperatorTableViewCellDelegate: class {
     func operatorTableViewCell(_ tableViewCell: OperatorTableViewCell, didSelect button: UIButton)
 }
+
 class OperatorTableViewCell: UITableViewCell {
     
     @IBOutlet private weak var button: UIButton?
@@ -17,6 +18,7 @@ class OperatorTableViewCell: UITableViewCell {
     weak var delegate: OperatorTableViewCellDelegate?
 
     override func awakeFromNib() {
+        
         super.awakeFromNib()
         self.selectionStyle = .none
         self.setupOperatorButton()
@@ -25,17 +27,23 @@ class OperatorTableViewCell: UITableViewCell {
     
     func setupOperator(_ indexPath: IndexPath) {
         var operatorString = "*"
+        
         if indexPath.row == 0 {
             operatorString = "+"
+            
         } else if indexPath.row == 1 {
             operatorString = "-"
+            
         } else if indexPath.row == 2 {
             operatorString = "*"
+            
         } else if indexPath.row == 3 {
             operatorString = "/"
+            
         } else {
             operatorString = "="
         }
+        
         self.button?.setTitle("\(operatorString)", for: .normal)
        
 

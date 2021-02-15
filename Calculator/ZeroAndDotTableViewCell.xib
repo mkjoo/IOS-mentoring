@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="ZeroAndDotTableViewCell" customModule="Calculator" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fwT-3b-Zdq">
+                        <rect key="frame" x="0.0" y="0.0" width="213.5" height="44"/>
+                        <state key="normal" title="Button"/>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JVb-Yi-0Al">
+                        <rect key="frame" x="213.5" y="0.0" width="106.5" height="44"/>
+                        <state key="normal" title="Button"/>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="JVb-Yi-0Al" firstAttribute="leading" secondItem="fwT-3b-Zdq" secondAttribute="trailing" id="EKW-3R-OY1"/>
+                    <constraint firstItem="JVb-Yi-0Al" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="EY4-C8-Uja"/>
+                    <constraint firstAttribute="bottom" secondItem="fwT-3b-Zdq" secondAttribute="bottom" id="MDC-jk-vCM"/>
+                    <constraint firstItem="JVb-Yi-0Al" firstAttribute="height" secondItem="fwT-3b-Zdq" secondAttribute="height" id="MpG-PQ-7JJ"/>
+                    <constraint firstItem="fwT-3b-Zdq" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Ocf-Vt-AMr"/>
+                    <constraint firstItem="fwT-3b-Zdq" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" id="SjZ-s8-Xdi"/>
+                    <constraint firstAttribute="trailing" secondItem="JVb-Yi-0Al" secondAttribute="trailing" id="TTK-78-CXM"/>
+                    <constraint firstItem="fwT-3b-Zdq" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="2/3" id="eMV-eZ-R54"/>
+                    <constraint firstItem="fwT-3b-Zdq" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="sGI-cM-Sp6"/>
+                    <constraint firstAttribute="bottom" secondItem="JVb-Yi-0Al" secondAttribute="bottom" id="uIw-bc-gke"/>
+                    <constraint firstItem="JVb-Yi-0Al" firstAttribute="width" secondItem="fwT-3b-Zdq" secondAttribute="width" multiplier="0.5" id="zgJ-xB-QFN"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="leftButton" destination="fwT-3b-Zdq" id="vmU-OJ-IPW"/>
+                <outlet property="rightButton" destination="JVb-Yi-0Al" id="rKl-lj-dw0"/>
+            </connections>
+            <point key="canvasLocation" x="137.68115942028987" y="99.776785714285708"/>
+        </tableViewCell>
+    </objects>
+</document>

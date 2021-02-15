@@ -10,12 +10,14 @@ import UIKit
 class ViewController: UIViewController {
 
     
-    var inputFirstNumberString:String = "";
-    var inputSecondNumberString:String = "";
-    var operatorString:String = "";
-    var resultText:String = "";
+    var inputFirstNumberString:String = ""
+    var inputSecondNumberString:String = ""
+    var operatorString:String = ""
+    var resultText:String = ""
+    var operatingString: String=""
     
     @IBOutlet private weak var resultLabel: UILabel?
+    @IBOutlet private weak var operatingStringLabel: UILabel?
     @IBOutlet private weak var operatorButtonTableView: UITableView?
     @IBOutlet private var numbericButtonTableView: UITableView?
     
@@ -43,11 +45,13 @@ class ViewController: UIViewController {
         guard let inputOperatorString = sender.titleLabel?.text else { return }
         
         calculator.insertOperatorString(inputOperatorString)
+        //self.operatingStringLabel?.text += calculator.insertOperatorString(inputOperatorString)
     }
     
     @IBAction private func didClickResultFunction(_ sender: UIButton){
         
-        calculator.calculateResult()
+        self.resultLabel?.text = calculator.calculateResult()
+        
     }
     
     @IBAction private func didClickResetFunction(_ sender: UIButton){
@@ -79,6 +83,11 @@ extension ViewController: CalculatorDelegate{
 private extension ViewController {
     
     func setupTableView() {
+        self.setNumericButtonTableView()
+        self.setOperatorButtonTableView()
+    }
+    
+    func setNumericButtonTableView() {
         self.numbericButtonTableView?.delegate = self
         self.numbericButtonTableView?.dataSource = self
         self.numbericButtonTableView?.isScrollEnabled = false
@@ -88,6 +97,9 @@ private extension ViewController {
         self.numbericButtonTableView?.register(UINib(nibName: "ResetTableViewCell", bundle: nil),
                                                forCellReuseIdentifier: "ResetTableViewCell")
         
+    }
+    
+    func setOperatorButtonTableView() {
         self.operatorButtonTableView?.delegate = self
         self.operatorButtonTableView?.dataSource = self
         self.operatorButtonTableView?.isScrollEnabled = false
@@ -96,59 +108,55 @@ private extension ViewController {
                                                forCellReuseIdentifier: "OperatorTableViewCell")
         
     }
-    
-    
-        
-    
+
 }
-
-
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        if tableView == self.numbericButtonTableView {
+            return 2
+            
+        } else {
+            return 1
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if(tableView == numbericButtonTableView){
+        if tableView == self.numbericButtonTableView {
             return section == 0 ? 4 : 1
+            
         }else{
-            return section == 0 ? 5 : 1
+            return 5
         }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let height = tableView.frame.height
         
         return tableView.frame.height / 5.0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
-        if(tableView == numbericButtonTableView){
+        if tableView == numbericButtonTableView {
             if indexPath.section == 0 {
                 let numbericCell = tableView.dequeueReusableCell(withIdentifier: "NumbericTableViewCell", for: indexPath) as? NumbericTableViewCell
                 numbericCell?.setupBasicNumber(indexPath)
                 numbericCell?.delegate = self
                 return numbericCell ?? cell
+                
             } else {
                 let resetAllCell = tableView.dequeueReusableCell(withIdentifier: "ResetTableViewCell", for: indexPath) as? ResetTableViewCell
                 return resetAllCell ?? cell
             }
             
-        }else{
-           
+        } else {
             let operatorCell = tableView.dequeueReusableCell(withIdentifier: "OperatorTableViewCell", for: indexPath) as? OperatorTableViewCell
             operatorCell?.setupOperator(indexPath)
             operatorCell?.delegate = self
             return operatorCell ?? cell
-           
-            
         }
- 
     }
-    
 }
 
 extension ViewController: NumbericTableViewCellDelegate {
@@ -170,13 +178,14 @@ extension ViewController: ResetTableViewCellDelegate{
 extension ViewController: OperatorTableViewCellDelegate{
     func operatorTableViewCell(_ tableViewCell: OperatorTableViewCell, didSelect button: UIButton) {
         print("\(#function) buttonTitle: \(button.titleLabel?.text)")
-        if(button.titleLabel?.text == "="){
+        if button.titleLabel?.text == "=" {
             didClickResultFunction(button)
+            
         }else{
             didClickOperatorFunction(button)
         }
-        
     }
+    
 }
 
 

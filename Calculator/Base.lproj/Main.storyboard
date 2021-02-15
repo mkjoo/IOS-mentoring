@@ -23,16 +23,25 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Zt-lK-JPn">
                                 <rect key="frame" x="0.0" y="44" width="414" height="179"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0hb-g8-g0T">
-                                        <rect key="frame" x="0.0" y="158" width="414" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0hb-g8-g0T">
+                                        <rect key="frame" x="0.0" y="179" width="414" height="0.0"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="39"/>
+                                        <color key="textColor" red="0.28924823659999999" green="0.2878650525" blue="0.29886068760000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tMA-t8-EVS">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="27.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                        <color key="textColor" systemColor="systemTealColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
+                                    <constraint firstItem="tMA-t8-EVS" firstAttribute="top" secondItem="3Zt-lK-JPn" secondAttribute="top" id="98P-kA-VLz"/>
+                                    <constraint firstItem="tMA-t8-EVS" firstAttribute="leading" secondItem="3Zt-lK-JPn" secondAttribute="leading" id="Vln-ww-yBQ"/>
                                     <constraint firstItem="0hb-g8-g0T" firstAttribute="leading" secondItem="3Zt-lK-JPn" secondAttribute="leading" id="csA-Pi-xZK"/>
+                                    <constraint firstAttribute="trailing" secondItem="tMA-t8-EVS" secondAttribute="trailing" id="kYb-KZ-eJE"/>
                                     <constraint firstAttribute="trailing" secondItem="0hb-g8-g0T" secondAttribute="trailing" id="lPQ-ip-oZM"/>
                                     <constraint firstAttribute="bottom" secondItem="0hb-g8-g0T" secondAttribute="bottom" id="tlA-xA-1Nw"/>
                                 </constraints>
@@ -61,6 +70,7 @@
                     </view>
                     <connections>
                         <outlet property="numbericButtonTableView" destination="xfm-LH-jA5" id="esT-FY-iQG"/>
+                        <outlet property="operatingStringLabel" destination="tMA-t8-EVS" id="E0l-Y8-yZp"/>
                         <outlet property="operatorButtonTableView" destination="14r-2l-MXz" id="tqt-FJ-KSr"/>
                         <outlet property="resultLabel" destination="0hb-g8-g0T" id="kqy-1x-tHn"/>
                     </connections>
@@ -73,6 +83,9 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemTealColor">
+            <color red="0.35294117647058826" green="0.78431372549019607" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

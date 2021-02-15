@@ -29,20 +29,26 @@ class NumbericTableViewCell: UITableViewCell {
     
     func setupBasicNumber(_ indexPath: IndexPath) {
         var baseNumber = 0
+        
         if indexPath.row == 0 {
             baseNumber = 7
+            
         } else if indexPath.row == 1 {
             baseNumber = 4
             
         } else if indexPath.row == 2 {
             baseNumber = 1
+            
         } else {
             baseNumber = 0
         }
+        
         self.leftButton?.setTitle("\(baseNumber)", for: .normal)
-        if(baseNumber != 0){
+        
+        if baseNumber != 0 {
             self.centerButton?.setTitle("\(baseNumber + 1)", for: .normal)
             self.rightButton?.setTitle("\(baseNumber + 2)", for: .normal)
+            
         }else{
             self.centerButton?.setTitle(".", for: .normal)
             self.rightButton?.setTitle("?", for: .normal)
@@ -67,7 +73,7 @@ private extension NumbericTableViewCell {
     
 }
 
-private extension NumbericTableViewCell {
+extension NumbericTableViewCell {
     
     @objc func numbericButtonAction(_ sender: UIButton) {
         self.delegate?.numbericTableViewCell(self, didSelect: sender)
