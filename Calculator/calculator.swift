@@ -108,3 +108,4 @@ private extension Calculator{
         self.delegate?.calculatorDidChangeResult(newResult)
     }
 }
+
