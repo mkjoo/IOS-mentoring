@@ -18,11 +18,19 @@
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fwT-3b-Zdq">
                         <rect key="frame" x="0.0" y="0.0" width="213.5" height="44"/>
-                        <state key="normal" title="Button"/>
+                        <color key="backgroundColor" red="0.29023361209999998" green="0.28612285850000002" blue="0.29804363849999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                        <state key="normal" title="Button">
+                            <color key="titleColor" red="0.96783634870000002" green="0.96320815849999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        </state>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JVb-Yi-0Al">
                         <rect key="frame" x="213.5" y="0.0" width="106.5" height="44"/>
-                        <state key="normal" title="Button"/>
+                        <color key="backgroundColor" red="0.28924823659999999" green="0.2878650525" blue="0.29886068760000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                        <state key="normal" title="Button">
+                            <color key="titleColor" red="0.96783634870000002" green="0.96320815849999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        </state>
                     </button>
                 </subviews>
                 <constraints>
@@ -40,6 +48,7 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" red="0.28924823659999999" green="0.2878650525" blue="0.29886068760000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
             <connections>
                 <outlet property="leftButton" destination="fwT-3b-Zdq" id="vmU-OJ-IPW"/>
                 <outlet property="rightButton" destination="JVb-Yi-0Al" id="rKl-lj-dw0"/>

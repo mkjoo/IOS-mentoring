@@ -18,16 +18,14 @@ class ViewController: UIViewController {
     
     @IBOutlet private weak var resultLabel: UILabel?
     @IBOutlet private weak var operatingStringLabel: UILabel?
-    @IBOutlet private weak var operatorButtonTableView: UITableView?
-    @IBOutlet private var numbericButtonTableView: UITableView?
-    
+    @IBOutlet private weak var buttonContainerView: UIView?
+    private var buttonCollectionView: UICollectionView = .init(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     
     let calculator: Calculator = .init()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.calculator.delegate = self
-        self.setupTableView()
+        self.setupCollectionView()
         
         // Do any additional setup after loading the view.
     }
@@ -35,157 +33,129 @@ class ViewController: UIViewController {
     @IBAction private func didClickNumbeicFunction(_ sender: UIButton){
         print(#function);
         
-        guard let newInputNumber = sender.titleLabel?.text else { return }
+        guard
+            let newInputNumber = sender.titleLabel?.text
+        else { return }
         
-        calculator.inputNewNumber(newInputNumber)
+        self.operatingStringLabel?.text! += calculator.inputNewNumber(newInputNumber)
     }
     
     @IBAction private func didClickOperatorFunction(_ sender: UIButton){
         print(#function)
-        guard let inputOperatorString = sender.titleLabel?.text else { return }
+        guard
+            let inputOperatorString = sender.titleLabel?.text
+        else { return }
         
-        calculator.insertOperatorString(inputOperatorString)
-        //self.operatingStringLabel?.text += calculator.insertOperatorString(inputOperatorString)
+        self.operatingStringLabel?.text! += calculator.insertOperatorString(inputOperatorString)
     }
     
     @IBAction private func didClickResultFunction(_ sender: UIButton){
         
-        self.resultLabel?.text = calculator.calculateResult()
+        guard
+            let resultString: String? = calculator.calculateResult()
+        else { return }
         
+        self.resultLabel?.text = resultString
+        self.operatingStringLabel?.text = resultString
     }
     
     @IBAction private func didClickResetFunction(_ sender: UIButton){
-        
         calculator.resetAllString()
+        self.resultLabel?.text = ""
+        self.operatingStringLabel?.text = ""
     }
 
 }
-extension ViewController: CalculatorDelegate{
 
-    func calculatorNoNumber() {
-        print("There is no Number")
-    }
-    
-    func calculatorNoOperator() {
-        print("There is no Operator")
-    }
-    
-    func calculatorNoResult() {
-        print("There is no Result")
-    }
-    
-    func calculatorDidChangeResult(_ result: Double) {
-        self.resultLabel?.text = "\(result)"
-    }
-    
-}
 
 private extension ViewController {
     
-    func setupTableView() {
-        self.setNumericButtonTableView()
-        self.setOperatorButtonTableView()
-    }
-    
-    func setNumericButtonTableView() {
-        self.numbericButtonTableView?.delegate = self
-        self.numbericButtonTableView?.dataSource = self
-        self.numbericButtonTableView?.isScrollEnabled = false
-        self.numbericButtonTableView?.separatorStyle = .none
-        self.numbericButtonTableView?.register(UINib(nibName: "NumbericTableViewCell", bundle: nil),
-                                               forCellReuseIdentifier: "NumbericTableViewCell")
-        self.numbericButtonTableView?.register(UINib(nibName: "ResetTableViewCell", bundle: nil),
-                                               forCellReuseIdentifier: "ResetTableViewCell")
+    func setupCollectionView() {
+        self.buttonContainerView?.addSubview(self.buttonCollectionView)
         
-    }
-    
-    func setOperatorButtonTableView() {
-        self.operatorButtonTableView?.delegate = self
-        self.operatorButtonTableView?.dataSource = self
-        self.operatorButtonTableView?.isScrollEnabled = false
-        self.operatorButtonTableView?.separatorStyle = .none
-        self.operatorButtonTableView?.register(UINib(nibName: "OperatorTableViewCell", bundle: nil),
-                                               forCellReuseIdentifier: "OperatorTableViewCell")
-        
-    }
+        self.buttonCollectionView.backgroundColor = UIColor(red: CGFloat(49 / 255.0), green: CGFloat(49 / 255.0), blue:CGFloat(40 / 255.0), alpha: CGFloat(0.9))
+        self.buttonCollectionView.register(UINib(nibName: "ButtonCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ButtonCollectionViewCell")
+        self.buttonCollectionView.delegate = self
+        self.buttonCollectionView.dataSource = self
+        self.setupCollectionViewAutoLayout()
 
+    }
+    
+    func setupCollectionViewAutoLayout(){
+        guard let buttonContainerView = self.buttonContainerView else { return }
+        
+        self.buttonCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        self.buttonCollectionView.topAnchor.constraint(equalTo: buttonContainerView.topAnchor, constant: .zero).isActive = true
+        self.buttonCollectionView.leadingAnchor.constraint(equalTo: buttonContainerView.leadingAnchor , constant: .zero).isActive = true
+        self.buttonCollectionView.trailingAnchor.constraint(equalTo: buttonContainerView.trailingAnchor, constant: .zero).isActive = true
+        self.buttonCollectionView.bottomAnchor.constraint(equalTo: buttonContainerView.bottomAnchor, constant: .zero).isActive = true
+    }
 }
 
-extension ViewController: UITableViewDelegate, UITableViewDataSource {
+extension ViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        if tableView == self.numbericButtonTableView {
-            return 2
-            
-        } else {
-            return 1
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = buttonCollectionView.frame.width / 4.0
+        let height = buttonCollectionView.frame.height / 5.0
+        
+        if indexPath.row == 12 {
+            return CGSize(width: width*2, height: height)
+        } else if indexPath.row == 15 {
+            return CGSize(width: width*3, height: height)
+        }
+        
+        return CGSize(width: width, height: height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return .zero // 가로 spacing
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return .zero // 세로 spacing
+    }
+    
+}
+
+extension ViewController: UICollectionViewDataSource{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 17 // 9 + 5 + 2 + 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = buttonCollectionView.dequeueReusableCell(withReuseIdentifier: "ButtonCollectionViewCell", for: indexPath)
+        
+        if let buttonCell = cell as? ButtonCollectionViewCell{
+            buttonCell.update(indexPath)
+            buttonCell.delegate = self
+        }
+        return cell
+    }
+    
+    
+}
+
+extension ViewController: ButtonCollectionViewCellDelegate {
+    func buttonCollectionViewCell(_ cell: ButtonCollectionViewCell, didSelect sender: UIButton) {
+        self.decideAction(sender)
+    }
+}
+
+private extension ViewController {
+    func decideAction(_ sender: UIButton){
+        guard let titleString = sender.titleLabel?.text else { return }
+        switch titleString {
+        case "+","-","x","/":
+            self.didClickOperatorFunction(sender)
+        case "AC":
+            self.didClickResetFunction(sender)
+        case "=":
+            self.didClickResultFunction(sender)
+        default:
+            self.didClickNumbeicFunction(sender)
         }
     }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if tableView == self.numbericButtonTableView {
-            return section == 0 ? 4 : 1
-            
-        }else{
-            return 5
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        return tableView.frame.height / 5.0
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        if tableView == numbericButtonTableView {
-            if indexPath.section == 0 {
-                let numbericCell = tableView.dequeueReusableCell(withIdentifier: "NumbericTableViewCell", for: indexPath) as? NumbericTableViewCell
-                numbericCell?.setupBasicNumber(indexPath)
-                numbericCell?.delegate = self
-                return numbericCell ?? cell
-                
-            } else {
-                let resetAllCell = tableView.dequeueReusableCell(withIdentifier: "ResetTableViewCell", for: indexPath) as? ResetTableViewCell
-                return resetAllCell ?? cell
-            }
-            
-        } else {
-            let operatorCell = tableView.dequeueReusableCell(withIdentifier: "OperatorTableViewCell", for: indexPath) as? OperatorTableViewCell
-            operatorCell?.setupOperator(indexPath)
-            operatorCell?.delegate = self
-            return operatorCell ?? cell
-        }
-    }
 }
 
-extension ViewController: NumbericTableViewCellDelegate {
-    
-    func numbericTableViewCell(_ tableViewCell: NumbericTableViewCell, didSelect button: UIButton) {
-        print("\(#function) buttonTitle: \(button.titleLabel?.text)")
-        didClickNumbeicFunction(button)
-    }
-}
-
-extension ViewController: ResetTableViewCellDelegate{
-    func resetTableViewCell(_ tableViewCell: ResetTableViewCell, didSelect button: UIButton) {
-        print("\(#function) buttonTitle: \(button.titleLabel?.text)")
-        didClickResetFunction(button)
-        
-    }
-}
-
-extension ViewController: OperatorTableViewCellDelegate{
-    func operatorTableViewCell(_ tableViewCell: OperatorTableViewCell, didSelect button: UIButton) {
-        print("\(#function) buttonTitle: \(button.titleLabel?.text)")
-        if button.titleLabel?.text == "=" {
-            didClickResultFunction(button)
-            
-        }else{
-            didClickOperatorFunction(button)
-        }
-    }
-    
-}
 
 

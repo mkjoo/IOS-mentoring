@@ -18,7 +18,11 @@
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Za7-1p-8yK">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <state key="normal" title="Button"/>
+                        <color key="backgroundColor" red="1" green="0.70913271030000002" blue="0.32889692580000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                        <state key="normal" title="Button">
+                            <color key="titleColor" red="0.28924823659999999" green="0.2878650525" blue="0.29886068760000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        </state>
                     </button>
                 </subviews>
                 <constraints>
@@ -29,6 +33,7 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" red="1" green="0.70913271030000002" blue="0.32889692580000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
             <connections>
                 <outlet property="button" destination="Za7-1p-8yK" id="G04-Hc-K6S"/>
             </connections>
