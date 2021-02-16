@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 
 protocol CalculatorDelegate: class {
@@ -17,10 +18,11 @@ protocol CalculatorDelegate: class {
 
 class Calculator{
     
-    var inputFirstNumberString:String = "";
-    var inputSecondNumberString:String = "";
-    var operatorString:String = "";
-    var resultText:String = "";
+    var inputFirstNumberString: String = ""
+    var inputSecondNumberString: String = ""
+    var operatorString: String = ""
+    var resultText: String = ""
+    var didClickResultButton: Bool = false
     
     weak var delegate: CalculatorDelegate?
     
@@ -30,29 +32,34 @@ class Calculator{
             return ""
         }
 
-        if self.operatorString.isEmpty {
+        if self.operatorString.isEmpty && !self.didClickResultButton {
             self.inputFirstNumberString += inputNumberString
-            
             print("inputNumber1 ::: \(self.inputFirstNumberString)")
-        } else {
+            return inputNumberString
+            
+        } else if !self.operatorString.isEmpty {
             self.inputSecondNumberString += inputNumberString
             print("inputNumber2 ::: \(self.inputSecondNumberString)")
+            return inputNumberString
+            
+        } else {
+            return ""
         }
-        return inputNumberString
-    
-    
     }
         
     func insertOperatorString(_ newOperatorString: String) -> String{
-        
-        self.operatorString = newOperatorString
-        
-        return newOperatorString
+        if self.operatorString.isEmpty{
+            self.operatorString = newOperatorString
+            return newOperatorString
+            
+        }else{
+            self.calculateResult()
+            return self.insertOperatorString(newOperatorString)
+        }
         
     }
         
     func calculateResult() -> String{
-        
         guard
             !self.operatorString.isEmpty,
             let firstCalculateNumber = Double(inputFirstNumberString),
@@ -64,18 +71,23 @@ class Calculator{
 
         if (operatorString == "+"){
             self.resultText = String(firstCalculateNumber + secondCalculateNumber)
+            
         }else if (operatorString == "-"){
             self.resultText = String(firstCalculateNumber - secondCalculateNumber)
+            
         }else if (operatorString == "x"){
             self.resultText = String(firstCalculateNumber * secondCalculateNumber)
+            
         }else if (operatorString == "/"){
             self.resultText = String(firstCalculateNumber / secondCalculateNumber)
         }
             
         self.inputFirstNumberString = resultText
         self.inputSecondNumberString = "";
+        self.operatorString = "";
         
-        print("inputNumber1 :: result :: \(inputFirstNumberString)")
+        print("inputNumber1 :: result :: \(self.inputFirstNumberString)")
+        self.didClickResultButton = true
         
         return resultText
             
@@ -85,10 +97,8 @@ class Calculator{
         self.inputFirstNumberString = "";
         self.inputSecondNumberString = "";
         self.operatorString = "";
+        self.didClickResultButton = false
     }
-
-    
-    
 }
 
 private extension Calculator{
@@ -96,6 +106,5 @@ private extension Calculator{
         guard let newResult = Double(resultString) else { return }
         
         self.delegate?.calculatorDidChangeResult(newResult)
-        
     }
 }

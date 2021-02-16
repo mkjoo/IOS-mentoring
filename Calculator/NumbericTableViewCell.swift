@@ -73,7 +73,7 @@ private extension NumbericTableViewCell {
     
 }
 
-extension NumbericTableViewCell {
+private extension NumbericTableViewCell {
     
     @objc func numbericButtonAction(_ sender: UIButton) {
         self.delegate?.numbericTableViewCell(self, didSelect: sender)

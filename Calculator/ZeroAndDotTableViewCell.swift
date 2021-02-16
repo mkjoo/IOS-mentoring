@@ -7,14 +7,16 @@
 
 import UIKit
 
-
+protocol ZeroAndDotTableViewCellDelegate: class {
+    func ZeroAndDotTableViewCell(_ tableViewCell: ZeroAndDotTableViewCell, didSelect button: UIButton)
+}
 
 class ZeroAndDotTableViewCell: UITableViewCell {
 
     @IBOutlet private weak var leftButton: UIButton?
     @IBOutlet private weak var rightButton: UIButton?
     
-    let numbericTableViewCell: NumbericTableViewCell = .init()
+    weak var delegate: ZeroAndDotTableViewCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -35,12 +37,19 @@ class ZeroAndDotTableViewCell: UITableViewCell {
 private extension ZeroAndDotTableViewCell {
     
     func setupLeftButton() {
-        self.leftButton?.addTarget(self, action: #selector(numbericTableViewCell.numbericButtonAction(_:)), for: .touchUpInside)
+        self.leftButton?.addTarget(self, action: #selector(self.zeroAndDotButtonAction(_:)), for: .touchUpInside)
     }
     
     func setupRightButton() {
-        self.rightButton?.addTarget(self, action: #selector(numbericTableViewCell.numbericButtonAction(_:)), for: .touchUpInside)
+        self.rightButton?.addTarget(self, action: #selector(self.zeroAndDotButtonAction(_:)), for: .touchUpInside)
     }
     
+}
+
+private extension ZeroAndDotTableViewCell {
+    
+    @objc func zeroAndDotButtonAction(_ sender: UIButton) {
+        self.delegate?.ZeroAndDotTableViewCell(self, didSelect: sender)
+    }
 }
 

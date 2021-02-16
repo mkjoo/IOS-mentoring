@@ -35,28 +35,36 @@ class ViewController: UIViewController {
     @IBAction private func didClickNumbeicFunction(_ sender: UIButton){
         print(#function);
         
-        guard let newInputNumber = sender.titleLabel?.text else { return }
+        guard
+            let newInputNumber = sender.titleLabel?.text
+        else { return }
         
-        calculator.inputNewNumber(newInputNumber)
+        self.operatingStringLabel?.text! += calculator.inputNewNumber(newInputNumber)
     }
     
     @IBAction private func didClickOperatorFunction(_ sender: UIButton){
         print(#function)
-        guard let inputOperatorString = sender.titleLabel?.text else { return }
+        guard
+            let inputOperatorString = sender.titleLabel?.text
+        else { return }
         
-        calculator.insertOperatorString(inputOperatorString)
-        //self.operatingStringLabel?.text += calculator.insertOperatorString(inputOperatorString)
+        self.operatingStringLabel?.text! += calculator.insertOperatorString(inputOperatorString)
     }
     
     @IBAction private func didClickResultFunction(_ sender: UIButton){
         
-        self.resultLabel?.text = calculator.calculateResult()
+        guard
+            let resultString: String? = calculator.calculateResult()
+        else { return }
         
+        self.resultLabel?.text = resultString
+        self.operatingStringLabel?.text = resultString
     }
     
     @IBAction private func didClickResetFunction(_ sender: UIButton){
-        
         calculator.resetAllString()
+        self.resultLabel?.text = ""
+        self.operatingStringLabel?.text = ""
     }
 
 }
@@ -75,7 +83,7 @@ extension ViewController: CalculatorDelegate{
     }
     
     func calculatorDidChangeResult(_ result: Double) {
-        self.resultLabel?.text = "\(result)"
+        
     }
     
 }
@@ -96,6 +104,8 @@ private extension ViewController {
                                                forCellReuseIdentifier: "NumbericTableViewCell")
         self.numbericButtonTableView?.register(UINib(nibName: "ResetTableViewCell", bundle: nil),
                                                forCellReuseIdentifier: "ResetTableViewCell")
+        self.numbericButtonTableView?.register(UINib(nibName: "ZeroAndDotTableViewCell", bundle: nil),
+                                               forCellReuseIdentifier: "ZeroAndDotTableViewCell")
         
     }
     
@@ -115,7 +125,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         if tableView == self.numbericButtonTableView {
-            return 2
+            return 3
             
         } else {
             return 1
@@ -124,7 +134,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == self.numbericButtonTableView {
-            return section == 0 ? 4 : 1
+            return section == 0 ? 3 : 1
             
         }else{
             return 5
@@ -144,9 +154,16 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                 numbericCell?.setupBasicNumber(indexPath)
                 numbericCell?.delegate = self
                 return numbericCell ?? cell
+            
+            } else if indexPath.section == 1 {
+                let zeroAndDotCell = tableView.dequeueReusableCell(withIdentifier: "ZeroAndDotTableViewCell", for: indexPath) as? ZeroAndDotTableViewCell
+                zeroAndDotCell?.setupBasicNumber(indexPath)
+                zeroAndDotCell?.delegate = self
+                return zeroAndDotCell ?? cell
                 
             } else {
                 let resetAllCell = tableView.dequeueReusableCell(withIdentifier: "ResetTableViewCell", for: indexPath) as? ResetTableViewCell
+                resetAllCell?.delegate = self
                 return resetAllCell ?? cell
             }
             
@@ -185,7 +202,14 @@ extension ViewController: OperatorTableViewCellDelegate{
             didClickOperatorFunction(button)
         }
     }
+}
+
+extension ViewController: ZeroAndDotTableViewCellDelegate {
     
+    func ZeroAndDotTableViewCell(_ tableViewCell: ZeroAndDotTableViewCell, didSelect button: UIButton) {
+        print("\(#function) buttonTitle: \(button.titleLabel?.text)")
+        didClickNumbeicFunction(button)
+    }
 }
 
 

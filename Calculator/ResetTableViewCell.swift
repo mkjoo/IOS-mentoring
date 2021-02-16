@@ -13,10 +13,13 @@ protocol ResetTableViewCellDelegate: class {
 
 class ResetTableViewCell: UITableViewCell {
     
+    @IBOutlet private weak var resetButton: UIButton?
+    
     weak var delegate: ResetTableViewCellDelegate?
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.setupResetButton()
         // Initialization code
     }
 
@@ -24,6 +27,14 @@ class ResetTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+}
+
+private extension ResetTableViewCell {
+    
+    func setupResetButton() {
+        self.resetButton?.addTarget(self, action: #selector(self.resetButtonAction(_:)), for: .touchUpInside)
     }
     
 }

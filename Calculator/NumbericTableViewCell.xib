@@ -18,15 +18,27 @@
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HZA-aP-EQh">
                         <rect key="frame" x="0.0" y="0.0" width="106.5" height="44"/>
-                        <state key="normal" title="Button"/>
+                        <color key="backgroundColor" red="0.28924823659999999" green="0.2878650525" blue="0.29886068760000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                        <state key="normal" title="Button">
+                            <color key="titleColor" red="0.96783634870000002" green="0.96320815849999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        </state>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kJY-av-5lK">
                         <rect key="frame" x="213.5" y="0.0" width="106.5" height="44"/>
-                        <state key="normal" title="Button"/>
+                        <color key="backgroundColor" red="0.28924823659999999" green="0.2878650525" blue="0.29886068760000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                        <state key="normal" title="Button">
+                            <color key="titleColor" red="0.96783634870000002" green="0.96320815849999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        </state>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2bI-Mf-RD6">
                         <rect key="frame" x="106.5" y="0.0" width="106.5" height="44"/>
-                        <state key="normal" title="Button"/>
+                        <color key="backgroundColor" red="0.28924823659999999" green="0.2878650525" blue="0.29886068760000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                        <state key="normal" title="Button">
+                            <color key="titleColor" red="0.96783634870000002" green="0.96320815849999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        </state>
                     </button>
                 </subviews>
                 <constraints>
@@ -45,6 +57,7 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" red="0.28924823659999999" green="0.2878650525" blue="0.29886068760000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
             <connections>
                 <outlet property="centerButton" destination="2bI-Mf-RD6" id="CCv-yd-gcg"/>
                 <outlet property="leftButton" destination="HZA-aP-EQh" id="gCy-uJ-dhl"/>
