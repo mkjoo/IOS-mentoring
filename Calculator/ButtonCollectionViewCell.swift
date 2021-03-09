@@ -27,24 +27,27 @@ class ButtonCollectionViewCell: UICollectionViewCell {
         
     }
     
-    func update(_ indexPath: IndexPath){
+    func update(_ indexPath: IndexPath) {
         let row = indexPath.row
         
         var title = ""
+        let isOperatorButton = row == 3 || row == 7 || row == 11 || row == 14 || row == 16
         
-        if row == 3 || row == 7 || row == 11 || row == 14 || row == 16 {
+        if isOperatorButton {
             title = self.getOperatorString(row)
             self.cellButton?.backgroundColor = UIColor.orange
             self.cellButton?.setTitleColor(UIColor.darkGray, for: .normal)
+            
         } else {
             title = self.getNumbericString(row)
             self.cellButton?.backgroundColor = UIColor(red: CGFloat(49 / 255.0), green: CGFloat(49 / 255.0), blue:CGFloat(40 / 255.0), alpha: CGFloat(0.9))
             self.cellButton?.setTitleColor(UIColor.white, for: .normal)
         }
+        
         self.cellButton?.setTitle(title, for: .normal)
     }
     
-    func getOperatorString(_ row: Int) -> String{
+    func getOperatorString(_ row: Int) -> String {
         
         var operatorString = "*"
         
@@ -68,7 +71,7 @@ class ButtonCollectionViewCell: UICollectionViewCell {
         return operatorString
     }
     
-    func getNumbericString(_ row: Int) -> String{
+    func getNumbericString(_ row: Int) -> String {
         var numbericString = "0"
         
         if row == 15 {
@@ -100,11 +103,11 @@ class ButtonCollectionViewCell: UICollectionViewCell {
 
 private extension ButtonCollectionViewCell {
     
-    func setupButton(){
+    func setupButton() {
         self.cellButton?.addTarget(self, action: #selector(self.buttonCellDidTap(_:)), for: .touchUpInside)
     }
     
-    @objc func buttonCellDidTap(_ sender: UIButton){
+    @objc func buttonCellDidTap(_ sender: UIButton) {
         self.delegate?.buttonCollectionViewCell(self, didSelect: sender)
     }
 }
