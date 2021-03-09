@@ -47,7 +47,7 @@ class Calculator{
         }
     }
         
-    func insertOperatorString(_ newOperatorString: String) -> String{
+    func insertOperatorString(_ newOperatorString: String) -> String {
         if self.operatorString.isEmpty{
             self.operatorString = newOperatorString
             return newOperatorString
@@ -59,50 +59,49 @@ class Calculator{
         
     }
         
-    func calculateResult() -> String{
-        guard
-            !self.operatorString.isEmpty,
-            let firstCalculateNumber = Double(inputFirstNumberString),
-            let secondCalculateNumber = Double(inputSecondNumberString)
+    func calculateResult() -> String {
+        guard !self.operatorString.isEmpty,
+              let firstCalculateNumber = Double(self.inputFirstNumberString),
+              let secondCalculateNumber = Double(self.inputSecondNumberString)
         else {
             print("no operator!!! or number parsing error")
             return ""
         }
 
-        if (operatorString == "+"){
+        if self.operatorString == "+" {
             self.resultText = String(firstCalculateNumber + secondCalculateNumber)
             
-        }else if (operatorString == "-"){
+        } else if operatorString == "-" {
             self.resultText = String(firstCalculateNumber - secondCalculateNumber)
             
-        }else if (operatorString == "x"){
+        } else if operatorString == "x" {
             self.resultText = String(firstCalculateNumber * secondCalculateNumber)
             
-        }else if (operatorString == "/"){
+        } else if operatorString == "/" {
             self.resultText = String(firstCalculateNumber / secondCalculateNumber)
         }
             
         self.inputFirstNumberString = resultText
-        self.inputSecondNumberString = "";
-        self.operatorString = "";
+        self.inputSecondNumberString = ""
+        self.operatorString = ""
         
         print("inputNumber1 :: result :: \(self.inputFirstNumberString)")
         self.didClickResultButton = true
         
-        return resultText
+        return self.resultText
             
     }
     
     func resetAllString(){
-        self.inputFirstNumberString = "";
-        self.inputSecondNumberString = "";
-        self.operatorString = "";
+        self.inputFirstNumberString = ""
+        self.inputSecondNumberString = ""
+        self.operatorString = ""
         self.didClickResultButton = false
     }
 }
 
 private extension Calculator{
-    func didChageResult(_ resultString: String){
+    func didChageResult(_ resultString: String) {
         guard let newResult = Double(resultString) else { return }
         
         self.delegate?.calculatorDidChangeResult(newResult)

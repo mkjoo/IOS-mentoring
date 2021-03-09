@@ -10,11 +10,11 @@ import UIKit
 class ViewController: UIViewController {
 
     
-    var inputFirstNumberString:String = ""
-    var inputSecondNumberString:String = ""
-    var operatorString:String = ""
-    var resultText:String = ""
-    var operatingString: String=""
+    var inputFirstNumberString: String = ""
+    var inputSecondNumberString: String = ""
+    var operatorString: String = ""
+    var resultText: String = ""
+    var operatingString: String="" 
     
     @IBOutlet private weak var resultLabel: UILabel?
     @IBOutlet private weak var operatingStringLabel: UILabel?
@@ -30,37 +30,33 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    @IBAction private func didClickNumbeicFunction(_ sender: UIButton){
-        print(#function);
-        
-        guard
-            let newInputNumber = sender.titleLabel?.text
-        else { return }
-        
-        self.operatingStringLabel?.text! += calculator.inputNewNumber(newInputNumber)
-    }
-    
-    @IBAction private func didClickOperatorFunction(_ sender: UIButton){
+    @IBAction private func didClickNumbeicFunction(_ sender: UIButton) {
         print(#function)
-        guard
-            let inputOperatorString = sender.titleLabel?.text
-        else { return }
         
-        self.operatingStringLabel?.text! += calculator.insertOperatorString(inputOperatorString)
+        guard let newInputNumber = sender.titleLabel?.text,
+              let operatingStringLabelText = self.operatingStringLabel?.text else { return }
+        
+        self.operatingStringLabel?.text = operatingStringLabelText + self.calculator.inputNewNumber(newInputNumber)
     }
     
-    @IBAction private func didClickResultFunction(_ sender: UIButton){
+    @IBAction private func didClickOperatorFunction(_ sender: UIButton) {
+        print(#function)
+        guard let inputOperatorString = sender.titleLabel?.text,
+              let operatingStringText = self.operatingStringLabel?.text else { return }
         
-        guard
-            let resultString: String? = calculator.calculateResult()
-        else { return }
+        self.operatingStringLabel?.text = operatingStringText + self.calculator.insertOperatorString(inputOperatorString)
+    }
+    
+    @IBAction private func didClickResultFunction(_ sender: UIButton) {
+        
+        let resultString = self.calculator.calculateResult()
         
         self.resultLabel?.text = resultString
         self.operatingStringLabel?.text = resultString
     }
     
     @IBAction private func didClickResetFunction(_ sender: UIButton){
-        calculator.resetAllString()
+        self.calculator.resetAllString()
         self.resultLabel?.text = ""
         self.operatingStringLabel?.text = ""
     }
@@ -95,24 +91,15 @@ private extension ViewController {
 extension ViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = buttonCollectionView.frame.width / 4.0
-        let height = buttonCollectionView.frame.height / 5.0
-        
-        if indexPath.row == 12 {
-            return CGSize(width: width*2, height: height)
-        } else if indexPath.row == 15 {
-            return CGSize(width: width*3, height: height)
-        }
-        
-        return CGSize(width: width, height: height)
+        return self.sizeForItemAt(collectionView, indexPath: indexPath)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return .zero // 가로 spacing
+        return .zero
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return .zero // 세로 spacing
+        return .zero
     }
     
 }
@@ -141,16 +128,42 @@ extension ViewController: ButtonCollectionViewCellDelegate {
     }
 }
 
+extension ViewController {
+    
+    func sizeForItemAt(_ collectionView: UICollectionView, indexPath: IndexPath) -> CGSize{
+        let width = self.buttonCollectionView.frame.width / 4.0
+        let height = self.buttonCollectionView.frame.height / 5.0
+        
+        let isZeroButton = indexPath.row == 12
+        let isResetButton = indexPath.row == 15
+        
+        if isZeroButton {
+            return CGSize(width: width*2, height: height)
+            
+        } else if isResetButton {
+            return CGSize(width: width*3, height: height)
+            
+        } else {
+            return CGSize(width: width, height: height)
+        }
+    }
+}
+
 private extension ViewController {
-    func decideAction(_ sender: UIButton){
+    func decideAction(_ sender: UIButton) {
         guard let titleString = sender.titleLabel?.text else { return }
+        
         switch titleString {
+        
         case "+","-","x","/":
             self.didClickOperatorFunction(sender)
+            
         case "AC":
             self.didClickResetFunction(sender)
+            
         case "=":
             self.didClickResultFunction(sender)
+            
         default:
             self.didClickNumbeicFunction(sender)
         }
